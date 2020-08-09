@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>info.tomfi.tutorials</groupId>
+  <artifactId>dependency-injection-java-part2-tutorial</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>dependency-injection-java-part2-tutorial</name>
+  <url>https://portfolio.tomfi.info/tutorials.html</url>
+  <description>Dependency Injection in Java is easy - Part 2 - Leveraging with Google Guice</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>11</maven.compiler.release>
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.install.skip>true</maven.install.skip>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>tomerfi</id>
+      <name>Tomer Figenblat</name>
+      <email>tomer.figenblat@gmail.com</email>
+      <url>https://github.com/TomerFi</url>
+      <roles>
+        <role>Software developer</role>
+      </roles>
+      <timezone>Asia/Jerusalem</timezone>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>https://github.com/TomerFi/dependency-injection-java-part1-tutorial</url>
+    <connection>scm:git:https://github.com/TomerFi/dependency-injection-java-part1-tutorial.git</connection>
+  </scm>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>4.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>29.0-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.16.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.4.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

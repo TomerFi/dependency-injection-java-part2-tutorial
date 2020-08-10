@@ -1,6 +1,6 @@
 ---
 title: Dependency Injection in Java is easy - Part 2 - Leveraging with Google Guice
-published: true
+published: false
 description: This is a series of posts simplifying and exemplifying Dependency Injection in Java.
 tags: ["java", "programming", "tutorial", "code"]
 ---
@@ -44,7 +44,7 @@ For instance, you can find similarities between:
 
 - [Spring's Bean](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-java-bean-annotation) and [Guice's Provides](https://github.com/google/guice/wiki/ProvidesMethods), both incorporate logic for creating a dependency.
 
-Not a beliver yet :grey_question: Alright, let's throw `C#` in the mix :grey_exclamation:
+Not a believer yet :grey_question: Alright, let's throw `C#` in the mix :grey_exclamation:
 
 - [Spring's Configuration](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-annotation-config), [Guice's Modules](https://github.com/google/guice/wiki/GettingStarted#guice-modules), and [Autofac's Modules](https://autofaccn.readthedocs.io/en/latest/configuration/modules.html), can be used to configure dependencies.
 
@@ -71,7 +71,8 @@ Some frameworks offer different scopes than others, as features.
 So...</br>
 Let's code.
 
-Heads up, the example application is the same as the one in [Part 1 - Merely a design pattern][1] minus the parts before incorporating the *dependency injection design pattern*.
+Heads up, the example application is the same as the one in [Part 1 - Merely a design pattern][1] minus the parts before incorporating the *dependency injection design pattern*.</br>
+If you got the app section from *Part 1*, you can skip to the [incorporating guice section](#2-incorporating-google-guice).
 
 You can check out the code for this part of the tutorial in [Github][0].
 

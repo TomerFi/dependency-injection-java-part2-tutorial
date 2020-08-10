@@ -1,11 +1,11 @@
 ---
 title: Dependency Injection in Java is easy - Part 2 - Leveraging with Google Guice
-published: false
+published: true
 description: This is a series of posts simplifying and exemplifying Dependency Injection in Java.
 tags: ["java", "programming", "tutorial", "code"]
 ---
 
-## Part 2 - Google Guice
+## Part 2 - Leveraging with Google Guice
 
 This post is part of a multiple parts tutorial,</br>
 This part, as the heading suggests will focus on leveraging *Dependency Injection* with [Google Guice](https://github.com/google/guice/wiki).
@@ -22,6 +22,7 @@ So...</br>
 You're probably asking yourselves, what is there to leverage in a base code that follows the [dependency injection design pattern][1] :grey_question:
 
 The answer is simple, **Everything**... :grey_exclamation:</br>
+
 I promise you, by the time you'll get through this post, you'll understand the benefits and the necessity of incorporating a *di framework* in your app.
 
 First, let's touch base about how does *dependency injection frameworks* work...</br>
@@ -53,12 +54,14 @@ I can go on...</br>
 But I believe my point is made.</br>
 :sunglasses:
 
-Under the hood, the *framework* builds factories that can provide your dependencies to objects based on multiple criteria, type, name, and for some *frameworks* even category.
+Under the hood, the *framework* builds factories that can provide the dependencies to objects based on multiple criteria, such as type and name.
 
-At the base level, there are 3 common scopes for dependencies living in the *di framework context*:
+At the base level, there are three common lifecycle scopes for dependencies living in the *di framework context*:
 
 - *Eager Singleton*: **one instance** of the dependency will be created in the framework's context **immediately upon the framework's instantiation**, the same instance will be used by any objects living in the context.
+
 - *Lazy Singleton*: **one instance** of the dependency will be created in the framework's context **only after the dependency is declared by an object**, upon its instantiation, the same instance will be used by any objects living in the context.
+
 - *Non-Singleton*: **an instance** of the dependency will be created **per declaration upon every declaration**, meaning, every object declaring will get his instance of the dependency.
 
 There are more scopes, but these are the most commonly used three.</br>
@@ -289,6 +292,8 @@ public final class MicrosoftService implements MailService {
 
 #### 1.2.3. Mail Engine
 
+The concrete implementation of `MailEngine` is `RobustMailEngine`, it collects the mail from the different services:
+
 ```java
 public final class RobustMailEngine implements MailEngine {
   private final Set<MailService> mailServices;
@@ -346,7 +351,7 @@ Got mail by MICROSOFT, from my.boss@work.info, with the subject stop writing tut
 Got mail by MICROSOFT, from next.door.neighbor@kibutz.org, with the subject do you have a star screwdriver?
 ```
 
-As you may have noticed, this application uses the *dependency injection design pattern*.</br>
+As you may have noticed, this application designed with the *dependency injection design pattern* in mind.</br>
 The dependencies are currently controlled by the `main` method, so it should be easy to incorporate [Google Guice](https://github.com/google/guice/wiki).
 
 ## 2. Incorporating Google Guice
@@ -451,10 +456,13 @@ From a [Scopes](https://github.com/google/guice/wiki/Scopes) point-of-view...</b
 *Guice*'s default scope is *Non-Singleton*,</br>
 meaning the *Set* of *GmailService* and *MicrosoftService* will be created as new instances for every object who needs them.</br>
 
-The *RobustMailEngine* on the other end is bound as a *Singelton*. Based on [Guice's docs](https://github.com/google/guice/wiki/Scopes#eager-singletons), that means that in *Production stage* it will be an *Eager Singleton*, and in *Development stage* it will be a *Lazy Singleton*. Either way, it's going to be a *Singleton*, meaning our app will have only one instance of *RobustMailEngine*.</br>
+The *RobustMailEngine* on the other end is bound as a *Singelton*.</br>
+Based on [Guice's docs](https://github.com/google/guice/wiki/Scopes#eager-singletons), that means that in *Production stage* it will be an *Eager Singleton*, and in *Development stage* it will be a *Lazy Singleton*.</br>
+Either way, it's going to be a *Singleton*, meaning our app will have only one instance of *RobustMailEngine*.</br>
+
 The default stage for *Guice* is *Development stage*, so we can expect a *Lazy Singleton*.
 
-> Please note, *RobustMailEngine* is a dependency, it will be injected to whoever needs it, but as we configured earlier, it also needs dependencies for itself (the *Set* of *MailService*).</br>
+> Please note, *RobustMailEngine* is a dependency, it will be injected to whoever needs it, but as we configured earlier with *@Inject*, it also needs dependencies for itself (the *Set* of *MailService*).</br>
 > *Guice* will catch that and inject the set of mail services while instantiating the engine.
 
 ### 2.4 Update the app to use Guice
@@ -501,16 +509,23 @@ As stated, in *Development stage* the *MainEngine* is a *Lazy Singleton*, plus, 
 The next step, asking the injector for an instance of *MailCollectorApp* will accomplish the following:
 
 - *Guice* will pick up the constructor in *MailCollectorApp*, as it's the only constructor.
+
 - As the constructor is marked with *@Inject*, *Guice* will look in its context for a dependency of type *MailEngine*.
-- I will find the *RobustMailEngine* configured, which is a *Lazy Singleton*.
+
+- It will find the *RobustMailEngine* configured, which is a *Lazy Singleton*.
+
 - While trying to instantiate it, it will pick up its constructor which is also marked with *@Inject*.
+
 - *Guice* will look for a suitable dependency with the type *Set* of *MailService*.
+
 - It will find the *Set* of *GoogleService* and *MicrosoftService*, which is a *Non-Singleton*.
 
-After preparing the dependency graph, *Guice* will:
+After preparing the *dependency graph*, *Guice* will:
 
 - Create the set after instantiating both *GmailService* and *MicrosoftService*.
+
 - Instantiate the *RobustMailEngine* injecting the *Set*.
+
 - Instantiate the *MailCollectorApp* injecting the *RobustMailEngine*.
 
 We then get our instance *MailCollectorApp* with everything we need in it, from which we invoke getMail to get all of our mail.

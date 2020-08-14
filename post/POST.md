@@ -1,6 +1,6 @@
 ---
 title: Dependency Injection in Java is easy - Part 2 - Leveraging with Google Guice
-published: false
+published: true
 description: This is a series of posts simplifying and exemplifying Dependency Injection in Java.
 tags: ["java", "programming", "tutorial", "code"]
 ---
@@ -17,6 +17,10 @@ But, in you wanna start here instead, I'll recap in a sentence:
 
 That's it, you're all caught up.</br>
 :grin:
+
+The next part of this tutorial is quite similar to this one using a different *di framework*: [Part 3 - Leveraging with Spring Context](https://dev.to/tomerfi/dependency-injection-in-java-is-easy-part-3-leveraging-with-spring-context-gcc). You can opt to read it instead of this one, in case you prefer *Spring*.
+
+If you're still here, let's dive in...
 
 So...</br>
 You're probably asking yourselves, what is there to leverage in a base code that follows the [dependency injection design pattern][1] :grey_question:

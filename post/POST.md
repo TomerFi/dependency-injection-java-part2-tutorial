@@ -3,6 +3,8 @@ title: Dependency Injection in Java is easy - Part 2 - Leveraging with Google Gu
 published: true
 description: This is a series of posts simplifying and exemplifying Dependency Injection in Java.
 tags: ["java", "programming", "tutorial", "code"]
+cover_image: https://source.unsplash.com/ieic5Tq8YMk
+series: Dependency Injection in Java is easy
 ---
 
 ## Part 2 - Leveraging with Google Guice
